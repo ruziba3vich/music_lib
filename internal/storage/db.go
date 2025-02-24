@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func InitDB(cfg *config.Config) (*gorm.DB, error) {
+func GetDBConnection(cfg *config.Config) (*gorm.DB, error) {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		cfg.DBHost, cfg.DBUser, cfg.DBPassword, cfg.DBName, cfg.DBPort, cfg.DBSSLMode,
