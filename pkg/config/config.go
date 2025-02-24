@@ -9,17 +9,8 @@ import (
 )
 
 type Config struct {
-	Port        string
-	DBHost      string
-	DBPort      string
-	DBUser      string
-	DBPassword  string
-	DBName      string
-	DBSSLMode   string
-	ExternalAPI string
-	RedisHost   string
-	RedisPort   string
-	RedisTTL    int
+	Port, DBHost, DBPort, DBUser, DBPassword, DBName, DBSSLMode, ExternalAPI, RedisHost, RedisPort string
+	RedisTTL                                                                                       int
 }
 
 func LoadConfig() *Config {
