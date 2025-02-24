@@ -49,3 +49,51 @@ Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +00
 [MusicLib] 2025/02/24 21:51:11 app.go:63: Shutting down server...
 [MusicLib] 2025/02/24 21:51:11 app.go:74: Server shutdown gracefully
 [MusicLib] 2025/02/24 21:51:11 main.go:20: <nil>
+[MusicLib] 2025/02/24 21:52:10 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 21:54:11 service.go:26: INFO: Creating song: &{ID:5bbd415a-0bb2-5c32-bb77-326571787f3d Artists:[Artist One Artist Two] Group:Music Group Name Name:Epic Song Lyrics:Verse 1: 
+This is the start of something new,
+A melody just for you.
+
+Chorus: 
+Sing it loud, sing it bright,
+Feel the rhythm through the night.
+Let the music take control,
+Fill your heart and free your soul.
+
+Verse 2: 
+The journey starts, we take our flight,
+Through the dark and into light.
+
+Bridge: 
+Oh, the echoes call our names,
+Through the fire and through the flames.
+
+Outro: 
+Hold on tight, don't let go,
+Ride the wave, let it flow.
+Memories made in the sound,
+Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +0000 UTC CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+[MusicLib] 2025/02/24 21:54:19 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:55:10 service.go:66: INFO: Fetching songs with filter map[artist:Artist One] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:55:10 service.go:69: ERROR: Failed to fetch songs: ERROR: column "artist" does not exist (SQLSTATE 42703)
+[MusicLib] 2025/02/24 21:55:10 handler.go:93: ERROR: Failed to fetch songs: ERROR: column "artist" does not exist (SQLSTATE 42703)
+[MusicLib] 2025/02/24 21:55:35 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:56:46 service.go:46: INFO: Fetching song ID: artists
+[MusicLib] 2025/02/24 21:56:46 service.go:49: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 21:56:46 handler.go:71: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 21:56:56 service.go:46: INFO: Fetching song ID: artists
+[MusicLib] 2025/02/24 21:56:56 service.go:49: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 21:56:56 handler.go:71: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 21:58:13 service.go:46: INFO: Fetching song ID: artists
+[MusicLib] 2025/02/24 21:58:13 service.go:49: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 21:58:13 handler.go:71: ERROR: Failed to fetch song ID artists: invalid UUID length: 7
+[MusicLib] 2025/02/24 22:01:00 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:01:00 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:01:00 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:01:03 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:01:12 handler.go:180: ERROR: Error occured in parsing requst
+[MusicLib] 2025/02/24 22:02:28 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:02:28 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:02:28 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:03:45 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:03:57 service.go:95: INFO: Searching for songs by artist: Artist One, limit: 10, offset: 0

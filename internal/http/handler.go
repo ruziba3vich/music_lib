@@ -34,7 +34,7 @@ func (h *Handler) RegisterRoutes(router *gin.Engine) {
 		api.GET("/songs", h.GetSongsHandler)
 		api.GET("/songs/:id", h.GetSongByIDHandler)
 		api.GET("/songs/:id/lyrics", h.GetSongLyricsPaginatedHandler)
-		api.GET("/songs/artists/:id", h.GetSongsByArtistHandler)
+		api.GET("/songs/artists", h.GetSongsByArtistHandler)
 		api.PUT("/songs/:id", h.UpdateSongHandler)
 		api.DELETE("/songs/:id", h.DeleteSongHandler)
 	}
@@ -175,7 +175,14 @@ func getIntQueryParam(c *gin.Context, key string, defaultValue int) int {
 }
 
 func (h *Handler) GetSongsByArtistHandler(c *gin.Context) {
-	artist := c.Query("artist")
+	var request struct {
+		Artist string `json:"artist"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		h.logger.Printf("ERROR: Error occured in parsing requst")
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	limit, err := strconv.Atoi(c.DefaultQuery("limit", "10"))
 	if err != nil {
 		h.logger.Printf("ERROR: Invalid limit parameter: %v", err)
@@ -190,15 +197,15 @@ func (h *Handler) GetSongsByArtistHandler(c *gin.Context) {
 		return
 	}
 
-	if artist == "" {
+	if request.Artist == "" {
 		h.logger.Println("ERROR: Artist name is required")
 		c.JSON(http.StatusBadRequest, gin.H{"error": "artist name is required"})
 		return
 	}
 
-	songs, err := h.repo.GetSongsByArtist(artist, limit, offset)
+	songs, err := h.repo.GetSongsByArtist(request.Artist, limit, offset)
 	if err != nil {
-		h.logger.Printf("ERROR: Failed to get songs for artist %s: %v", artist, err)
+		h.logger.Printf("ERROR: Failed to get songs for artist %s: %v", request.Artist, err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
 		return
 	}
