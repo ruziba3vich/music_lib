@@ -1,4 +1,303 @@
+definitions:
+  github_com_ruziba3vich_music_lib_internal_models.Song:
+    properties:
+      artists:
+        items:
+          type: string
+        type: array
+      createdAt:
+        type: string
+      group:
+        type: string
+      id:
+        type: string
+      lyrics:
+        type: string
+      name:
+        type: string
+      release_date:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /api/songs:
+    get:
+      description: Fetches a list of songs with optional pagination
+      parameters:
+      - default: 10
+        description: Limit the number of results
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+            type: array
+        "500":
+          description: failed to fetch songs
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all songs
+      tags:
+      - songs
+    post:
+      consumes:
+      - application/json
+      description: Adds a new song to the database
+      parameters:
+      - description: Song object
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new song
+      tags:
+      - songs
+  /api/songs/{id}:
+    delete:
+      description: Deletes a song by ID
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a song
+      tags:
+      - songs
+    get:
+      description: Fetches a song from the database using its ID
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a song by ID
+      tags:
+      - songs
+    put:
+      consumes:
+      - application/json
+      description: Update the details of an existing song
+      parameters:
+      - description: Song data
+        in: body
+        name: song
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+        "400":
+          description: Invalid request body
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to update song
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a song
+      tags:
+      - songs
+  /api/songs/{id}/lyrics:
+    get:
+      description: Fetches paginated lyrics for a song by ID
+      parameters:
+      - description: Song ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - default: 10
+        description: Limit the number of results
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        "500":
+          description: failed to fetch lyrics
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get song lyrics with pagination
+      tags:
+      - songs
+  /api/songs/artists:
+    get:
+      consumes:
+      - application/json
+      description: Fetch songs by the given artist name with pagination
+      parameters:
+      - description: Artist name
+        in: query
+        name: artist
+        required: true
+        type: string
+      - description: 'Limit (default: 10)'
+        in: query
+        name: limit
+        type: integer
+      - description: 'Offset (default: 0)'
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+            type: array
+        "400":
+          description: Invalid request parameters
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to fetch songs
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get songs by artist
+      tags:
+      - songs
+  /api/songs/filtered:
+    get:
+      consumes:
+      - application/json
+      description: Fetches songs based on filters provided as query parameters
+      parameters:
+      - description: Filter by song name
+        in: query
+        name: name
+        type: string
+      - description: Filter by artist name
+        in: query
+        name: artist
+        type: string
+      - description: Filter by genre
+        in: query
+        name: genre
+        type: string
+      - default: 10
+        description: Limit the number of results
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_ruziba3vich_music_lib_internal_models.Song'
+            type: array
+        "500":
+          description: failed to fetch songs
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get songs with filters and pagination
+      tags:
+      - songs
 swagger: "2.0"

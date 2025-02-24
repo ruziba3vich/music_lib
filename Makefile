@@ -35,6 +35,8 @@ run:
 build:
 	go build -o music_lib main.go
 
+swag-gen:
+	swag init -g internal/http/handler.go -o docs --parseDependency --parseInternal
 test:
 	go test ./...
 

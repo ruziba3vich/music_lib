@@ -100,3 +100,62 @@ Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +00
 [MusicLib] 2025/02/24 22:07:14 app.go:63: Shutting down server...
 [MusicLib] 2025/02/24 22:07:14 app.go:74: Server shutdown gracefully
 [MusicLib] 2025/02/24 22:07:14 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:19:45 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:26:21 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:26:21 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:26:21 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:31:21 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:31:44 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:31:44 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:31:44 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:34:08 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:35:28 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:35:28 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:35:28 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:35:37 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:36:07 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 22:36:32 service.go:46: INFO: Fetching song ID: 5bbd415a-0bb2-5c32-bb77-326571787f3d
+[MusicLib] 2025/02/24 22:37:16 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 22:41:36 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:41:36 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:41:36 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:41:44 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 22:42:35 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:42:35 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:42:35 main.go:20: <nil>
+[MusicLib] 2025/02/24 22:42:44 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:24:17 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 23:26:12 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:26:12 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:26:12 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:26:22 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:27:53 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:27:53 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:27:53 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:27:57 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:30:09 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:30:09 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:30:09 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:30:12 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:34:07 handler.go:263: ---------------------- request came ------------------------------------
+[MusicLib] 2025/02/24 23:34:07 handler.go:266: ERROR: Artist name is required
+[MusicLib] 2025/02/24 23:34:46 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:34:46 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:34:46 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:34:51 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:35:04 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:35:04 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:35:04 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:35:15 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:35:38 handler.go:263: ---------------------- request came ------------------------------------
+[MusicLib] 2025/02/24 23:35:38 handler.go:270: ------------------ Artist One ------------------------
+[MusicLib] 2025/02/24 23:35:38 service.go:95: INFO: Searching for songs by artist: Artist One, limit: 10, offset: 0
+[MusicLib] 2025/02/24 23:36:06 service.go:76: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 23:37:29 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:37:29 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:37:29 main.go:20: <nil>
+[MusicLib] 2025/02/24 23:37:32 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 23:37:40 service.go:95: INFO: Searching for songs by artist: Artist One, limit: 10, offset: 0
+[MusicLib] 2025/02/24 23:38:22 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 23:38:22 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 23:38:22 main.go:20: <nil>
