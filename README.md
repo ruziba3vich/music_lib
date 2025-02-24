@@ -6,7 +6,7 @@ The **Music Library API** is a RESTful service for managing songs, artists, and 
 ## Technologies Used
 - **Golang** (v1.24)
 - **PostgreSQL** (v16)
-- **Redis** (v7)
+- **Redis** (v)9
 - **Docker & Docker Compose**
 - **Gin Framework**
 
