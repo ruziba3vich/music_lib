@@ -159,3 +159,27 @@ Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +00
 [MusicLib] 2025/02/24 23:38:22 app.go:63: Shutting down server...
 [MusicLib] 2025/02/24 23:38:22 app.go:74: Server shutdown gracefully
 [MusicLib] 2025/02/24 23:38:22 main.go:20: <nil>
+[MusicLib] 2025/02/25 00:11:15 app.go:70: Starting server on port 8080
+[MusicLib] 2025/02/25 00:15:55 service.go:27: INFO: Creating song: &{ID:dc5b4035-bf4b-5208-83dd-c9ffc67d4a17 Artists:[John Carter Artist One] Group:Midnight Echo Name:Echoes of the Night Lyrics:Lost in the whispers of the midnight breeze,
+Shadows dancing under city lights with ease.
+Your voice lingers in the air, so soft, so clear,
+A melody of memories that pulls me near.
+
+Oh, the echoes of the night, they call my name,
+Running through my heart like an endless flame.
+Every moment, every touch, still feels the same,
+But you're a ghost in the dark, playing love’s cruel game.
+
+Fading footsteps on an empty street,
+Tracing stories where our hearts used to meet.
+I close my eyes, but I still see you there,
+A silent song tangled in the autumn air. IsDeleted:false ReleaseDate:2024-02-24 00:00:00 +0000 UTC CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+[MusicLib] 2025/02/25 00:16:21 service.go:77: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/25 00:16:24 service.go:77: INFO: Fetching songs with (limit: 10, offset: 0)
+[MusicLib] 2025/02/25 00:16:45 service.go:47: INFO: Fetching song ID: dc5b4035-bf4b-5208-83dd-c9ffc67d4a17
+[MusicLib] 2025/02/25 00:17:23 service.go:96: INFO: Searching for songs by artist: Artist One, limit: 10, offset: 0
+[MusicLib] 2025/02/25 00:18:38 service.go:87: INFO: Updating song ID 5bbd415a-0bb2-5c32-bb77-326571787f3d
+[MusicLib] 2025/02/25 00:19:10 service.go:47: INFO: Fetching song ID: 5bbd415a-0bb2-5c32-bb77-326571787f3d
+[MusicLib] 2025/02/25 00:19:25 app.go:81: Shutting down server...
+[MusicLib] 2025/02/25 00:19:25 app.go:92: Server shutdown gracefully
+[MusicLib] 2025/02/25 00:19:25 main.go:20: <nil>
