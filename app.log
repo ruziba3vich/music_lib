@@ -97,3 +97,6 @@ Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +00
 [MusicLib] 2025/02/24 22:02:28 main.go:20: <nil>
 [MusicLib] 2025/02/24 22:03:45 app.go:52: Starting server on port 8080
 [MusicLib] 2025/02/24 22:03:57 service.go:95: INFO: Searching for songs by artist: Artist One, limit: 10, offset: 0
+[MusicLib] 2025/02/24 22:07:14 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 22:07:14 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 22:07:14 main.go:20: <nil>
