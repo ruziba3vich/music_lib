@@ -10,15 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Storage struct {
-	db *gorm.DB
-}
-
-func NewStorage(db *gorm.DB) (*Storage, error) {
-
-	return &Storage{db: db}, nil
-}
-
 func InitDB(cfg *config.Config) (*gorm.DB, error) {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
