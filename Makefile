@@ -1,29 +1,26 @@
-# Load environment variables from .env
+include .env
 export $(shell sed 's/=.*//' .env)
 
-# Migration directory
-MIGRATION_DIR = migrations
+name ?= new_migration
+dir = migrations
 
-# Database URL
 DB_URL=postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST)/$(DB_NAME)?sslmode=$(DB_SSLMODE)
 
-# Migration name (default: "new_migration")
-NAME ?= new_migration
-
-# Create a new migration file
 migrate-create:
-	docker run --rm -v $(PWD)/$(MIGRATION_DIR):/migrations migrate/migrate \
-	  create -ext sql -dir /migrations -seq $(NAME)
+	docker run --rm -v $(PWD)/migrations:/migrations migrate/migrate \
+		create -ext sql -dir $(dir) -seq $(name)
 
-# Apply all migrations
 migrate-up:
-	docker run --rm --network=host -v $(PWD)/$(MIGRATION_DIR):/migrations migrate/migrate \
-	  -path=/migrations -database "$(DB_URL)" up
+	docker run --rm --network=bridge -v $(PWD)/migrations:/migrations migrate/migrate \
+		-path=/migrations -database $(DB_URL) up
 
-# Rollback the last migration
 migrate-down:
-	docker run --rm --network=host -v $(PWD)/$(MIGRATION_DIR):/migrations migrate/migrate \
-	  -path=/migrations -database "$(DB_URL)" down 1
+	docker run --rm --network=bridge -v $(PWD)/migrations:/migrations migrate/migrate \
+		-path=/migrations -database $(DB_URL) down 1
+
+migrate-down-all:
+	docker run --rm --network=bridge -v $(PWD)/migrations:/migrations migrate/migrate \
+		-path=/migrations -database $(DB_URL) down
 
 # Rollback all migrations
 migrate-down-all:
