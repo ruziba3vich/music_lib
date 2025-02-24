@@ -1,12 +1,17 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type Song struct {
-	gorm.Model
-	Group       string `gorm:"not null"`
-	Song        string `gorm:"not null"`
-	ReleaseDate string `gorm:"not null"`
-	Text        string `gorm:"type:text;not null"`
-	Link        string `gorm:"not null"`
+	ID        uuid.UUID `gorm:"type:uuid;primaryKey"`
+	Group     string    `gorm:"not null"`
+	Name      string    `gorm:"not null"`
+	Lyrics    string    `gorm:"type:text"`
+	IsDeleted bool      `gorm:"default:false"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
