@@ -8,7 +8,9 @@ type (
 		DeleteSong(string) error
 		GetSongByID(string) (*models.Song, error)
 		GetSongLyricsPaginated(string, int, int) ([]string, error)
-		GetSongs(map[string]any, int, int) ([]models.Song, error)
+		GetSongsWithFilters(map[string]any, int, int) ([]models.Song, error)
+		GetSongs(int, int) ([]models.Song, error)
 		UpdateSong(*models.Song) error
+		GetSongsByArtist(artist string, limit int, offset int) ([]models.Song, error)
 	}
 )

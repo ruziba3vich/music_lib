@@ -9,20 +9,29 @@ import (
 )
 
 type Storage struct {
-	DB *gorm.DB
+	db *gorm.DB
 }
 
 func NewStorage(db *gorm.DB) *Storage {
-	return &Storage{DB: db}
+	return &Storage{db: db}
 }
 
 func (s *Storage) CreateSong(song *models.Song) error {
-	return s.DB.Create(song).Error
+	return s.db.Create(song).Error
 }
 
-func (s *Storage) GetSongs(filter map[string]any, limit, offset int) ([]models.Song, error) {
+func (s *Storage) GetSongsWithFilters(filter map[string]any, limit, offset int) ([]models.Song, error) {
 	var songs []models.Song
-	query := s.DB.Where(filter).Where("is_deleted = false").Limit(limit).Offset(offset)
+	query := s.db.Where(filter).Where("is_deleted = false").Limit(limit).Offset(offset)
+	if err := query.Find(&songs).Error; err != nil {
+		return nil, err
+	}
+	return songs, nil
+}
+
+func (s *Storage) GetSongs(limit, offset int) ([]models.Song, error) {
+	var songs []models.Song
+	query := s.db.Where("is_deleted = false").Limit(limit).Offset(offset)
 	if err := query.Find(&songs).Error; err != nil {
 		return nil, err
 	}
@@ -36,14 +45,14 @@ func (s *Storage) GetSongByID(id string) (*models.Song, error) {
 		return nil, err
 	}
 
-	if err := s.DB.Where("id = ? AND is_deleted = false", songUUID).First(&song).Error; err != nil {
+	if err := s.db.Where("id = ? AND is_deleted = false", songUUID).First(&song).Error; err != nil {
 		return nil, err
 	}
 	return &song, nil
 }
 
 func (s *Storage) UpdateSong(song *models.Song) error {
-	return s.DB.Where("id = ? AND is_deleted = false", song.ID).Save(song).Error
+	return s.db.Where("id = ? AND is_deleted = false", song.ID).Save(song).Error
 }
 
 func (s *Storage) DeleteSong(id string) error {
@@ -51,7 +60,7 @@ func (s *Storage) DeleteSong(id string) error {
 	if err != nil {
 		return err
 	}
-	return s.DB.Model(&models.Song{}).Where("id = ?", songUUID).Update("is_deleted", true).Error
+	return s.db.Model(&models.Song{}).Where("id = ?", songUUID).Update("is_deleted", true).Error
 }
 
 func (s *Storage) GetSongLyricsPaginated(id string, limit, offset int) ([]string, error) {
@@ -61,7 +70,7 @@ func (s *Storage) GetSongLyricsPaginated(id string, limit, offset int) ([]string
 		return nil, err
 	}
 
-	if err := s.DB.Where("id = ? AND is_deleted = false", songUUID).First(&song).Error; err != nil {
+	if err := s.db.Where("id = ? AND is_deleted = false", songUUID).First(&song).Error; err != nil {
 		return nil, err
 	}
 
@@ -77,4 +86,13 @@ func (s *Storage) GetSongLyricsPaginated(id string, limit, offset int) ([]string
 	}
 
 	return verses[start:end], nil
+}
+
+func (s *Storage) GetSongsByArtist(artist string, limit int, offset int) ([]models.Song, error) {
+	var songs []models.Song
+	query := s.db.Where("? = ANY(artists)", artist).Limit(limit).Offset(offset).Find(&songs)
+	if query.Error != nil {
+		return nil, query.Error
+	}
+	return songs, nil
 }

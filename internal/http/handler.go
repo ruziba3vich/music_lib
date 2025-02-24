@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -29,9 +30,11 @@ func (h *Handler) RegisterRoutes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
 		api.POST("/songs", h.CreateSongHandler)
+		api.GET("/songs/filtered", h.GetSongsWithFiltersHandler)
 		api.GET("/songs", h.GetSongsHandler)
 		api.GET("/songs/:id", h.GetSongByIDHandler)
 		api.GET("/songs/:id/lyrics", h.GetSongLyricsPaginatedHandler)
+		api.GET("/songs/artists/:id", h.GetSongsByArtistHandler)
 		api.PUT("/songs/:id", h.UpdateSongHandler)
 		api.DELETE("/songs/:id", h.DeleteSongHandler)
 	}
@@ -73,8 +76,8 @@ func (h *Handler) GetSongByIDHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, song)
 }
 
-// GetSongsHandler handles fetching songs with filters and pagination
-func (h *Handler) GetSongsHandler(c *gin.Context) {
+// GetSongsWithFiltersHandler handles fetching songs with filters and pagination
+func (h *Handler) GetSongsWithFiltersHandler(c *gin.Context) {
 	var filters map[string]any
 	if err := c.ShouldBindJSON(&filters); err != nil {
 		h.logger.Printf("ERROR: Failed to parse filters: %v", err)
@@ -85,7 +88,23 @@ func (h *Handler) GetSongsHandler(c *gin.Context) {
 	limit := getIntQueryParam(c, "limit", 10)
 	offset := getIntQueryParam(c, "offset", 0)
 
-	songs, err := h.repo.GetSongs(filters, limit, offset)
+	songs, err := h.repo.GetSongsWithFilters(filters, limit, offset)
+	if err != nil {
+		h.logger.Printf("ERROR: Failed to fetch songs: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
+		return
+	}
+
+	c.JSON(http.StatusOK, songs)
+}
+
+// GetSongsHandler handles fetching songs with filters and pagination
+func (h *Handler) GetSongsHandler(c *gin.Context) {
+
+	limit := getIntQueryParam(c, "limit", 10)
+	offset := getIntQueryParam(c, "offset", 0)
+
+	songs, err := h.repo.GetSongs(limit, offset)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to fetch songs: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
@@ -153,4 +172,36 @@ func getIntQueryParam(c *gin.Context, key string, defaultValue int) int {
 		return defaultValue
 	}
 	return intVal
+}
+
+func (h *Handler) GetSongsByArtistHandler(c *gin.Context) {
+	artist := c.Query("artist")
+	limit, err := strconv.Atoi(c.DefaultQuery("limit", "10"))
+	if err != nil {
+		h.logger.Printf("ERROR: Invalid limit parameter: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid limit parameter"})
+		return
+	}
+
+	offset, err := strconv.Atoi(c.DefaultQuery("offset", "0"))
+	if err != nil {
+		h.logger.Printf("ERROR: Invalid offset parameter: %v", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid offset parameter"})
+		return
+	}
+
+	if artist == "" {
+		h.logger.Println("ERROR: Artist name is required")
+		c.JSON(http.StatusBadRequest, gin.H{"error": "artist name is required"})
+		return
+	}
+
+	songs, err := h.repo.GetSongsByArtist(artist, limit, offset)
+	if err != nil {
+		h.logger.Printf("ERROR: Failed to get songs for artist %s: %v", artist, err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
+		return
+	}
+
+	c.JSON(http.StatusOK, songs)
 }

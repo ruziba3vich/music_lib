@@ -35,3 +35,17 @@ Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +00
 [MusicLib] 2025/02/24 21:32:47 service.go:66: INFO: Fetching songs with filter map[artists:[Artist One]] (limit: 10, offset: 0)
 [MusicLib] 2025/02/24 21:32:47 service.go:69: ERROR: Failed to fetch songs: ERROR: malformed array literal: "Artist One" (SQLSTATE 22P02)
 [MusicLib] 2025/02/24 21:32:47 handler.go:90: ERROR: Failed to fetch songs: ERROR: malformed array literal: "Artist One" (SQLSTATE 22P02)
+[MusicLib] 2025/02/24 21:39:20 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:39:56 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:40:59 service.go:66: INFO: Fetching songs with filter map[] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:41:37 service.go:36: INFO: Deleting song ID: 0c6b6075-fa8a-5595-94b7-12ae52e6824b
+[MusicLib] 2025/02/24 21:41:45 service.go:46: INFO: Fetching song ID: 0c6b6075-fa8a-5595-94b7-12ae52e6824b
+[MusicLib] 2025/02/24 21:41:45 service.go:49: ERROR: Failed to fetch song ID 0c6b6075-fa8a-5595-94b7-12ae52e6824b: record not found
+[MusicLib] 2025/02/24 21:41:45 handler.go:68: ERROR: Failed to fetch song ID 0c6b6075-fa8a-5595-94b7-12ae52e6824b: record not found
+[MusicLib] 2025/02/24 21:41:56 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:42:05 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:43:00 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:43:17 handler.go:80: ERROR: Failed to parse filters: EOF
+[MusicLib] 2025/02/24 21:51:11 app.go:63: Shutting down server...
+[MusicLib] 2025/02/24 21:51:11 app.go:74: Server shutdown gracefully
+[MusicLib] 2025/02/24 21:51:11 main.go:20: <nil>

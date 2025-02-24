@@ -61,10 +61,20 @@ func (s *Service) GetSongLyricsPaginated(id string, limit, offset int) ([]string
 	return verses, err
 }
 
-// GetSongs logs and calls storage.GetSongs
-func (s *Service) GetSongs(filter map[string]any, limit, offset int) ([]models.Song, error) {
+// GetSongsWithFilters logs and calls storage.GetSongs
+func (s *Service) GetSongsWithFilters(filter map[string]any, limit, offset int) ([]models.Song, error) {
 	s.logger.Printf("INFO: Fetching songs with filter %+v (limit: %d, offset: %d)", filter, limit, offset)
-	songs, err := s.storage.GetSongs(filter, limit, offset)
+	songs, err := s.storage.GetSongsWithFilters(filter, limit, offset)
+	if err != nil {
+		s.logger.Printf("ERROR: Failed to fetch songs: %v", err)
+	}
+	return songs, err
+}
+
+// GetSongs logs and calls storage.GetSongs
+func (s *Service) GetSongs(limit, offset int) ([]models.Song, error) {
+	s.logger.Printf("INFO: Fetching songs with (limit: %d, offset: %d)", limit, offset)
+	songs, err := s.storage.GetSongs(limit, offset)
 	if err != nil {
 		s.logger.Printf("ERROR: Failed to fetch songs: %v", err)
 	}
@@ -79,4 +89,16 @@ func (s *Service) UpdateSong(song *models.Song) error {
 		s.logger.Printf("ERROR: Failed to update song ID %s: %v", song.ID, err)
 	}
 	return err
+}
+
+func (s *Service) GetSongsByArtist(artist string, limit, offset int) ([]models.Song, error) {
+	s.logger.Printf("INFO: Searching for songs by artist: %s, limit: %d, offset: %d", artist, limit, offset)
+
+	songs, err := s.storage.GetSongsByArtist(artist, limit, offset)
+	if err != nil {
+		s.logger.Printf("ERROR: Failed to fetch songs for artist %s: %v", artist, err)
+		return nil, err
+	}
+
+	return songs, nil
 }
