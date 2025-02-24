@@ -80,16 +80,3 @@ func (s *Service) UpdateSong(song *models.Song) error {
 	}
 	return err
 }
-
-/*
-	// Create log file
-	logFile, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("Failed to open log file: %s", err)
-	}
-
-	// Multi-writer for both file and console logging
-	multiWriter := log.MultiWriter(os.Stdout, logFile)
-	logger := log.New(multiWriter, "[MusicLib] ", log.Ldate|log.Ltime|log.Lshortfile)
-
-*/

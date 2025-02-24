@@ -1,4 +1,4 @@
-package http
+package handler
 
 import (
 	"fmt"
@@ -22,6 +22,18 @@ func NewHandler(repo repos.Repo, logger *log.Logger) *Handler {
 	return &Handler{
 		repo:   repo,
 		logger: logger,
+	}
+}
+
+func (h *Handler) RegisterRoutes(router *gin.Engine) {
+	api := router.Group("/api")
+	{
+		api.POST("/songs", h.CreateSongHandler)
+		api.GET("/songs", h.GetSongsHandler)
+		api.GET("/songs/:id", h.GetSongByIDHandler)
+		api.GET("/songs/:id/lyrics", h.GetSongLyricsPaginatedHandler)
+		api.PUT("/songs/:id", h.UpdateSongHandler)
+		api.DELETE("/songs/:id", h.DeleteSongHandler)
 	}
 }
 
