@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,7 +11,9 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/redis/go-redis/v9"
 	handler "github.com/ruziba3vich/music_lib/internal/http"
+	redisservice "github.com/ruziba3vich/music_lib/internal/redis_service"
 	"github.com/ruziba3vich/music_lib/internal/service"
 	"github.com/ruziba3vich/music_lib/internal/storage"
 	"github.com/ruziba3vich/music_lib/pkg/config"
@@ -26,8 +29,23 @@ func Run(logger *log.Logger) error {
 		logger.Fatalf("Failed to connect to database: %v", err)
 	}
 
+	client := redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%s", cfg.RedisHost, cfg.RedisPort), // Redis address
+		Password: "",                                                 // No password by default
+		DB:       0,                                                  // Default DB
+	})
+
+	// Test connection
+	ctx := context.Background()
+	if err := client.Ping(ctx).Err(); err != nil {
+		logger.Fatalf("Could not connect to Redis: %v", err)
+		return err
+	}
+
+	redisservice := redisservice.NewRedisService(client, cfg)
+
 	// Initialize storage
-	store := storage.NewStorage(db)
+	store := storage.NewStorage(db, redisservice)
 
 	// Initialize service layer
 	service := service.NewService(store, logger)

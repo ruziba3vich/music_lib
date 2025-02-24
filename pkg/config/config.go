@@ -17,6 +17,8 @@ type Config struct {
 	DBName      string
 	DBSSLMode   string
 	ExternalAPI string
+	RedisHost   string
+	RedisPort   string
 	RedisTTL    int
 }
 
@@ -37,6 +39,8 @@ func LoadConfig() *Config {
 		DBSSLMode:   getEnv("DB_SSLMODE", "disable"),
 		ExternalAPI: getEnv("EXTERNAL_API_URL", "http://localhost:8000/info"),
 		RedisTTL:    redisTTL,
+		RedisHost:   getEnv("REDIS_HOST", "localhost"),
+		RedisPort:   getEnv("REDIS_PORT", "6379"),
 	}
 
 	return config

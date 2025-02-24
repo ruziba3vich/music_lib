@@ -66,7 +66,7 @@ func (h *Handler) CreateSongHandler(c *gin.Context) {
 	timestamp := time.Now().UnixNano()
 	song.ID = uuid.NewSHA1(uuid.NameSpaceOID, []byte(time.Unix(0, timestamp).String()))
 
-	if err := h.repo.CreateSong(&song); err != nil {
+	if err := h.repo.CreateSong(c, &song); err != nil {
 		h.logger.Printf("ERROR: Failed to create song: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create song"})
 		return
@@ -87,7 +87,7 @@ func (h *Handler) CreateSongHandler(c *gin.Context) {
 func (h *Handler) GetSongByIDHandler(c *gin.Context) {
 	id := c.Param("id")
 
-	song, err := h.repo.GetSongByID(id)
+	song, err := h.repo.GetSongByID(c, id)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to fetch song ID %s: %v", id, err)
 		c.JSON(http.StatusNotFound, gin.H{"error": "song not found"})
@@ -127,7 +127,7 @@ func (h *Handler) GetSongsWithFiltersHandler(c *gin.Context) {
 	limit := getIntQueryParam(c, "limit", 10)
 	offset := getIntQueryParam(c, "offset", 0)
 
-	songs, err := h.repo.GetSongsWithFilters(filters, limit, offset)
+	songs, err := h.repo.GetSongsWithFilters(c, filters, limit, offset)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to fetch songs: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
@@ -151,7 +151,7 @@ func (h *Handler) GetSongsHandler(c *gin.Context) {
 	limit := getIntQueryParam(c, "limit", 10)
 	offset := getIntQueryParam(c, "offset", 0)
 
-	songs, err := h.repo.GetSongs(limit, offset)
+	songs, err := h.repo.GetSongs(c, limit, offset)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to fetch songs: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
@@ -176,7 +176,7 @@ func (h *Handler) GetSongLyricsPaginatedHandler(c *gin.Context) {
 	limit := getIntQueryParam(c, "limit", 10)
 	offset := getIntQueryParam(c, "offset", 0)
 
-	lyrics, err := h.repo.GetSongLyricsPaginated(id, limit, offset)
+	lyrics, err := h.repo.GetSongLyricsPaginated(c, id, limit, offset)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to fetch lyrics for song ID %s: %v", id, err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch lyrics"})
@@ -205,7 +205,7 @@ func (h *Handler) UpdateSongHandler(c *gin.Context) {
 		return
 	}
 
-	if err := h.repo.UpdateSong(&song); err != nil {
+	if err := h.repo.UpdateSong(c, &song); err != nil {
 		h.logger.Printf("ERROR: Failed to update song: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to update song"})
 		return
@@ -224,7 +224,7 @@ func (h *Handler) UpdateSongHandler(c *gin.Context) {
 func (h *Handler) DeleteSongHandler(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := h.repo.DeleteSong(id); err != nil {
+	if err := h.repo.DeleteSong(c, id); err != nil {
 		h.logger.Printf("ERROR: Failed to delete song ID %s: %v", id, err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to delete song"})
 		return
@@ -281,7 +281,7 @@ func (h *Handler) GetSongsByArtistHandler(c *gin.Context) {
 		return
 	}
 
-	songs, err := h.repo.GetSongsByArtist(artist, limit, offset)
+	songs, err := h.repo.GetSongsByArtist(c, artist, limit, offset)
 	if err != nil {
 		h.logger.Printf("ERROR: Failed to get songs for artist %s: %v", artist, err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch songs"})
