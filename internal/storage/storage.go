@@ -90,7 +90,7 @@ func (s *Storage) GetSongLyricsPaginated(id string, limit, offset int) ([]string
 
 func (s *Storage) GetSongsByArtist(artist string, limit int, offset int) ([]models.Song, error) {
 	var songs []models.Song
-	query := s.db.Where("? = ANY(artists)", artist).Limit(limit).Offset(offset).Find(&songs)
+	query := s.db.Where("? = ANY(artists) AND is_deleted = false", artist).Limit(limit).Offset(offset).Find(&songs)
 	if query.Error != nil {
 		return nil, query.Error
 	}

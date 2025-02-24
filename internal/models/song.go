@@ -17,3 +17,7 @@ type Song struct {
 	ReleaseDate time.Time      `json:"release_date"`
 	CreatedAt   time.Time
 }
+
+type RequestByArtistName struct {
+	Artist string `json:"artist"`
+}
