@@ -1,7 +1,5 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE IF NOT EXISTS songs (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY,
     artists VARCHAR[] NOT NULL,
     group VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,

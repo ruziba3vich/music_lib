@@ -1,0 +1,37 @@
+[MusicLib] 2025/02/24 21:20:52 app.go:26: Failed to connect to database: failed to connect to database: failed to connect to `host=172.17.0.2:5432 user=root_user database=music_db`: hostname resolving error (lookup 172.17.0.2:5432: no such host)
+[MusicLib] 2025/02/24 21:21:40 app.go:26: Failed to connect to database: failed to run migrations: ERROR: syntax error at or near "array" (SQLSTATE 42601)
+[MusicLib] 2025/02/24 21:24:11 app.go:52: Starting server on port 8080
+[MusicLib] 2025/02/24 21:27:36 service.go:26: INFO: Creating song: &{ID:0c6b6075-fa8a-5595-94b7-12ae52e6824b Artists:[Artist One Artist Two] Group:Music Group Name Name:Epic Song Lyrics:Verse 1: 
+This is the start of something new,
+A melody just for you.
+
+Chorus: 
+Sing it loud, sing it bright,
+Feel the rhythm through the night.
+Let the music take control,
+Fill your heart and free your soul.
+
+Verse 2: 
+The journey starts, we take our flight,
+Through the dark and into light.
+
+Bridge: 
+Oh, the echoes call our names,
+Through the fire and through the flames.
+
+Outro: 
+Hold on tight, don't let go,
+Ride the wave, let it flow.
+Memories made in the sound,
+Forever here, forever found. IsDeleted:false ReleaseDate:2025-02-24 00:00:00 +0000 UTC CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+[MusicLib] 2025/02/24 21:28:57 service.go:46: INFO: Fetching song ID: 0c6b6075-fa8a-5595-94b7-12ae52e6824b
+[MusicLib] 2025/02/24 21:31:19 service.go:56: INFO: Fetching lyrics for song ID 0c6b6075-fa8a-5595-94b7-12ae52e6824b (limit: 2, offset: 0)
+[MusicLib] 2025/02/24 21:31:34 service.go:56: INFO: Fetching lyrics for song ID 0c6b6075-fa8a-5595-94b7-12ae52e6824b (limit: 2, offset: 1)
+[MusicLib] 2025/02/24 21:31:39 service.go:56: INFO: Fetching lyrics for song ID 0c6b6075-fa8a-5595-94b7-12ae52e6824b (limit: 4, offset: 1)
+[MusicLib] 2025/02/24 21:32:08 handler.go:80: ERROR: Failed to parse filters: invalid character '}' looking for beginning of object key string
+[MusicLib] 2025/02/24 21:32:14 service.go:66: INFO: Fetching songs with filter map[group:Music Group Name name:Epic Song] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:32:20 service.go:66: INFO: Fetching songs with filter map[group:Music Group Name] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:32:26 service.go:66: INFO: Fetching songs with filter map[name:Epic Song] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:32:47 service.go:66: INFO: Fetching songs with filter map[artists:[Artist One]] (limit: 10, offset: 0)
+[MusicLib] 2025/02/24 21:32:47 service.go:69: ERROR: Failed to fetch songs: ERROR: malformed array literal: "Artist One" (SQLSTATE 22P02)
+[MusicLib] 2025/02/24 21:32:47 handler.go:90: ERROR: Failed to fetch songs: ERROR: malformed array literal: "Artist One" (SQLSTATE 22P02)
