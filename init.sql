@@ -1,2 +1,3 @@
 CREATE USER root_user WITH PASSWORD 'Dost0n1k';
 ALTER ROLE root_user WITH SUPERUSER;
+
