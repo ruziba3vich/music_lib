@@ -183,3 +183,4 @@ A silent song tangled in the autumn air. IsDeleted:false ReleaseDate:2024-02-24 
 [MusicLib] 2025/02/25 00:19:25 app.go:81: Shutting down server...
 [MusicLib] 2025/02/25 00:19:25 app.go:92: Server shutdown gracefully
 [MusicLib] 2025/02/25 00:19:25 main.go:20: <nil>
+[MusicLib] 2025/02/25 17:21:53 app.go:29: Failed to connect to database: failed to connect to database: failed to connect to `host=postgres_db user=root_user database=music_db`: hostname resolving error (lookup postgres_db: no such host)

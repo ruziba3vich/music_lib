@@ -4,25 +4,26 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: songs_db
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d songs_db"]
-      interval: 5s
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   redis:
     image: redis:7
     container_name: redis_cache
     restart: always
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:6379"
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis_data:/data
@@ -43,12 +44,20 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-
     environment:
-      DATABASE_URL: "postgres://root_user:Dost0n1k@postgres_db:5432/music_db?sslmode=disable"
-      REDIS_ADDR: "redis_cache:6379"
+      PORT: ${PORT}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_SSLMODE: ${DB_SSLMODE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_TTL: ${REDIS_TTL}
+      EXTERNAL_API_URL: ${EXTERNAL_API_URL}
     ports:
-      - "8080:8080"
+      - "${PORT}:${PORT}"
 
 volumes:
   pg_data:
